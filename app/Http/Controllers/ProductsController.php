@@ -33,16 +33,20 @@ class ProductsController extends Controller
         }
     }
     
-    public function allCategories()
-    {
-        $products = Product::all();
-        return response()->json(['products'=>$products], 200);
+    public function allCategory(){
+        $products = Product::select('category')->get();
+        $categories = array();
+        foreach($products as $product){
+            array_push($categories, $product['category']);
+        }
+        return response()->json(['categories'=>$categories], 200);
     }
 
 
     public function categoryProduct($category_name)
     {
-        return Product::where('category', $category_name)->get();
+        $products = Product::where('category', $category_name)->get();
+        return response()->json(['products'=>$products], 200);
     }
 
     public function addProduct(Request $request)
