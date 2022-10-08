@@ -23,13 +23,13 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->string('currency');
-            $table->float('price');
-            $table->string('brand');
-            $table->string('category');
-            $table->string('image');
+            $table->string('title', 100)->nullable();
+            $table->string('description', 100)->nullable();
+            $table->string('currency', 5)->nullable()->default('PHP');
+            $table->double('price')->default(0.0);
+            $table->string('brand', 30)->nullable()->default(null);
+            $table->string('category', 20)->nullable()->default(null);
+            $table->string('image', 255)->nullable()->default(null);
             $table->timestamps();
         });
     }
